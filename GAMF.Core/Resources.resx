@@ -183,4 +183,19 @@
   <data name="Save" xml:space="preserve">
     <value>Mentés</value>
   </data>
+  <data name="EnrollmentDateReport" xml:space="preserve">
+    <value>Első jelentkezések riport</value>
+  </data>
+  <data name="EnrollmentDates" xml:space="preserve">
+    <value>Első jelentkezések</value>
+  </data>
+  <data name="StudentCount" xml:space="preserve">
+    <value>Hallgatók száma</value>
+  </data>
+  <data name="StudentCredits" xml:space="preserve">
+    <value>Hallgatók szerzett kreditjei</value>
+  </data>
+  <data name="StudentCreditsReport" xml:space="preserve">
+    <value>Hallgatók szerzett kreditjei riport</value>
+  </data>
 </root>

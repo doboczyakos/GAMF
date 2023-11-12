@@ -1,0 +1,12 @@
+﻿@using GAMF.Core;
+@using GAMF.Web.Extensions;
+@model IEnumerable<StudentCreditsViewModel>
+
+@{
+    ViewData["Title"] = Resources.StudentCreditsReport;
+}
+
+<h2>@Resources.StudentCreditsReport</h2>
+
+@* Implemented a method to render a report based on an enumerable of viewmodels *@
+@Html.Report()

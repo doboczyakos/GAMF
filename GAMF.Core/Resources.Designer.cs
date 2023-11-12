@@ -160,6 +160,24 @@ namespace GAMF.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Első jelentkezések riport.
+        /// </summary>
+        public static string EnrollmentDateReport {
+            get {
+                return ResourceManager.GetString("EnrollmentDateReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Első jelentkezések.
+        /// </summary>
+        public static string EnrollmentDates {
+            get {
+                return ResourceManager.GetString("EnrollmentDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jelentkezések.
         /// </summary>
         public static string Enrollments {
@@ -237,6 +255,33 @@ namespace GAMF.Core {
         public static string Student {
             get {
                 return ResourceManager.GetString("Student", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hallgatók száma.
+        /// </summary>
+        public static string StudentCount {
+            get {
+                return ResourceManager.GetString("StudentCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hallgatók szerzett kreditjei.
+        /// </summary>
+        public static string StudentCredits {
+            get {
+                return ResourceManager.GetString("StudentCredits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hallgatók szerzett kreditjei riport.
+        /// </summary>
+        public static string StudentCreditsReport {
+            get {
+                return ResourceManager.GetString("StudentCreditsReport", resourceCulture);
             }
         }
         

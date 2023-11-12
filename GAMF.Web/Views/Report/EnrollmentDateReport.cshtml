@@ -1,0 +1,12 @@
+﻿@using GAMF.Core;
+@using GAMF.Web.Extensions;
+@model IEnumerable<EnrollmentDateViewModel>
+
+@{
+    ViewData["Title"] = Resources.EnrollmentDateReport;
+}
+
+<h2>@Resources.EnrollmentDateReport</h2>
+
+@* Implemented a method to render a report based on an enumerable of viewmodels *@
+@Html.Report()
