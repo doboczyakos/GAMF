@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAMF.Web", "GAMF.Web\GAMF.Web.csproj", "{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAMF.Core", "GAMF.Core\GAMF.Core.csproj", "{257FF6C1-A69D-4715-98CE-09F8968AA0A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D8F97A5-4E59-4849-B78E-9800861E73C1}
+	EndGlobalSection
+EndGlobal
