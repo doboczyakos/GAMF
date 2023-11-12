@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GAMF.Core.Models
 {
@@ -7,8 +8,10 @@ namespace GAMF.Core.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CourseId { get; set; }
 
+        [Display(Name = nameof(Resources.Title), ResourceType = typeof(Resources))]
         public required string Title { get; set; }
 
+        [Display(Name = nameof(Resources.Credits), ResourceType = typeof(Resources))]
         public int Credits { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();

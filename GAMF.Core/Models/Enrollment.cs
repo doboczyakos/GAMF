@@ -1,4 +1,6 @@
-﻿namespace GAMF.Core.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GAMF.Core.Models
 {
     public enum Grade { A, B, C, D, F }
 
@@ -10,6 +12,7 @@
 
         public int StudentId { get; set; }
 
+        [Display(Name = nameof(Resources.Grade), ResourceType = typeof(Resources))]
         public Grade? Grade { get; set; }
 
         public virtual Course? Course { get; set; }

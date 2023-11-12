@@ -1,0 +1,40 @@
+﻿@using GAMF.Core;
+@model GAMF.Core.Models.Student
+
+@{
+    ViewData["Title"] = Resources.Delete;
+}
+
+<h2>@Resources.Delete</h2>
+
+<h3>@Resources.AreYouSurYouWantToDelete</h3>
+<div>
+    <h4>@Resources.Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstMidName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@Resources.Delete" class="btn btn-primary" /> |
+        <a asp-action="Index">@Resources.BackToList</a>
+    </form>
+</div>
