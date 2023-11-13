@@ -13,6 +13,8 @@ namespace GAMF.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7021/") });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -22,6 +24,13 @@ namespace GAMF.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            else
+            {
+                app.UseWebAssemblyDebugging();
+            }
+
+            app.UseBlazorFrameworkFiles();
+            app.MapFallbackToFile("index.html");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

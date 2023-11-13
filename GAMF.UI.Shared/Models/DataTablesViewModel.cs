@@ -10,6 +10,4 @@
 
         public required IEnumerable<TViewModel> Data { get; init; }
     }
-
-    public enum OrderDirection { Asc, Desc }
 }

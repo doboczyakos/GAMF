@@ -1,0 +1,113 @@
+﻿@page "/enrollments"
+@using GAMF.Web.Models;
+@inject HttpClient Http
+
+<h2>@Resources.Enrollments</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">@Resources.Search</legend>
+            <form asp-action="Index">
+                <div class="form-group">
+                    <InputText placeholder="@Resources.EnrollmentSearch" title="@Resources.EnrollmentSearch" @bind-Value="@dataTablesRequest.SearchString" />
+                    <input type="button" value="@Resources.Search" class="btn btn-primary" onclick="@(async () => await LoadData())" />
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    <div class="col-md-4">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">@Resources.PageSize</legend>
+                <div class="form-group">
+                    <select @bind="dataTablesRequest.Length" @bind:after="@(async () => await LoadData())">
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+        </fieldset>
+    </div>
+</div>
+
+@{
+    var itemCount = 0;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="cursor: pointer" onclick="@(async () => await SortOrderChanged("courseTitle"))">
+                @Resources.Course
+            </th>
+            <th style="cursor: pointer" onclick="@(async () => await SortOrderChanged("studentFullName"))">
+                @Resources.StudentName
+            </th>
+            <th style="cursor: pointer" onclick="@(async () => await SortOrderChanged("grade"))">
+                @Resources.Grade
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (model != null)
+        {
+            foreach (var item in model.Data)
+            {
+                <tr>
+                    <td>
+                        @item.CourseTitle
+                    </td>
+                    <td>
+                        @item.StudentFullName
+                    </td>
+                    <td>
+                        @item.Grade
+                    </td>
+                </tr>
+                itemCount++;
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>@itemCount / @model?.RecordsFiltered</td>
+        </tr>
+    </tfoot>
+</table>
+
+@code {
+    private DataTablesRequest dataTablesRequest = new()
+    {
+        Length = 10,
+        Columns = new[] { new DataTablesColumn { Data = "courseTitle" }, new DataTablesColumn { Data = "studentFullName" }, new DataTablesColumn { Data = "grade" } },
+        Order = new[] { new DataTablesOrder { Column = 0, Direction = OrderDirection.Asc } }
+    };
+    private DataTablesViewModel<EnrollmentListViewModel>? model;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task SortOrderChanged(string columnName)
+    {
+        var columnIndex = dataTablesRequest.Columns.Select((col, i) => new { Column = col, Index = i }).Single(c => c.Column.Data == columnName).Index;
+        dataTablesRequest.Order = new[]
+        {
+            new DataTablesOrder
+            {
+                Column = columnIndex,
+                Direction = dataTablesRequest.Order[0].Column == columnIndex && dataTablesRequest.Order[0].Direction == OrderDirection.Asc ? OrderDirection.Desc : OrderDirection.Asc
+            }
+        };
+
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        var response = await Http.PostAsJsonAsync("/GetEnrollmentsBlazor", dataTablesRequest, default);
+        if (response.IsSuccessStatusCode)
+            model = await response.Content.ReadFromJsonAsync<DataTablesViewModel<EnrollmentListViewModel>>();
+    }
+}

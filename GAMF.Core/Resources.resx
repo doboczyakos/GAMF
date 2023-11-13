@@ -207,4 +207,7 @@
   <data name="Search" xml:space="preserve">
     <value>Keresés</value>
   </data>
+  <data name="PageSize" xml:space="preserve">
+    <value>Oldal méret</value>
+  </data>
 </root>

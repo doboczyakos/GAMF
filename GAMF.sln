@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAMF.Web", "GAMF.Web\GAMF.Web.csproj", "{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GAMF.Web", "GAMF.Web\GAMF.Web.csproj", "{A3924FCF-42A2-4EA7-94A8-EF58A38BAB66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAMF.Core", "GAMF.Core\GAMF.Core.csproj", "{257FF6C1-A69D-4715-98CE-09F8968AA0A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GAMF.Core", "GAMF.Core\GAMF.Core.csproj", "{257FF6C1-A69D-4715-98CE-09F8968AA0A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GAMF.BlazorClient", "GAMF.BlazorClient\GAMF.BlazorClient.csproj", "{23211A2F-F0A5-43B1-9D61-6BDB1A9AF5A0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GAMF.UI.Shared", "GAMF.UI.Shared\GAMF.UI.Shared.shproj", "{57F32E74-D3C3-455A-8E9D-7278126C1867}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,11 +25,19 @@ Global
 		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{257FF6C1-A69D-4715-98CE-09F8968AA0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23211A2F-F0A5-43B1-9D61-6BDB1A9AF5A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23211A2F-F0A5-43B1-9D61-6BDB1A9AF5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23211A2F-F0A5-43B1-9D61-6BDB1A9AF5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23211A2F-F0A5-43B1-9D61-6BDB1A9AF5A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D8F97A5-4E59-4849-B78E-9800861E73C1}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		GAMF.UI.Shared\GAMF.UI.Shared.projitems*{57f32e74-d3c3-455a-8e9d-7278126c1867}*SharedItemsImports = 13
+		GAMF.UI.Shared\GAMF.UI.Shared.projitems*{a3924fcf-42a2-4ea7-94a8-ef58a38bab66}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

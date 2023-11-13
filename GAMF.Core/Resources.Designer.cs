@@ -250,6 +250,15 @@ namespace GAMF.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oldal méret.
+        /// </summary>
+        public static string PageSize {
+            get {
+                return ResourceManager.GetString("PageSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mentés.
         /// </summary>
         public static string Save {

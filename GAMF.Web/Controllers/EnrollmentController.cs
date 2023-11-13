@@ -45,6 +45,12 @@ namespace GAMF.Web.Controllers
 
         public IActionResult Index2() => View();
 
+        [HttpGet("EnrollmentsBlazor")]
+        public IActionResult Index3() => View();
+
+        [HttpPost("GetEnrollmentsBlazor")]
+        public Task<DataTablesViewModel<EnrollmentListViewModel>> GetEnrollmentsBlazor([FromBody] DataTablesRequest dataTablesRequest) => GetEnrollments(dataTablesRequest);
+
         public async Task<DataTablesViewModel<EnrollmentListViewModel>> GetEnrollments([FromQuery] DataTablesRequest dataTablesRequest)
         {
             IQueryable<Enrollment> enrollments = _context.Enrollments

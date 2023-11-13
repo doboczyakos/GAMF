@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>57f32e74-d3c3-455a-8e9d-7278126c1867</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>GAMF.UI.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DataTablesRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DataTablesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\EnrollmentListViewModel.cs" />
+  </ItemGroup>
+</Project>

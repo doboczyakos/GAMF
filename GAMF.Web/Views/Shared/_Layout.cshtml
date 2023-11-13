@@ -43,6 +43,9 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Enrollment" asp-action="Index2">@Resources.Enrollments (Datatables)</a>
                         </li>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Enrollment" asp-action="Index3">@Resources.Enrollments (Blazor Webassembly)</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -63,7 +66,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
