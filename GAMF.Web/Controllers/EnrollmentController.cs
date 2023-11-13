@@ -3,6 +3,7 @@ using GAMF.Core.Models;
 using GAMF.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace GAMF.Web.Controllers
 {
@@ -43,19 +44,40 @@ namespace GAMF.Web.Controllers
 
         public IActionResult Index2() => View();
 
-        public async Task<IEnumerable<EnrollmentListViewModel>> GetEnrollments()
+        public async Task<DataTablesViewModel<EnrollmentListViewModel>> GetEnrollments(int draw, [FromQuery(Name = "search[value]")] string? searchString, int start, int length,
+            [FromQuery(Name = "order[0][column]")] int orderColumn, [FromQuery(Name = "order[0][dir]")] OrderDirection orderDirection)
         {
-            var enrollments = _context.Enrollments
+            IQueryable<Enrollment> enrollments = _context.Enrollments
                 .Include(e => e.Course)
-                .Include(e => e.Student)
-                .Select(e => new EnrollmentListViewModel
+                .Include(e => e.Student);
+
+            if (!string.IsNullOrEmpty(searchString) && searchString.ToUpper() is var searchStringUpper)
+            {
+                enrollments = enrollments.Where(s => s.Student!.LastName.Contains(searchStringUpper) || s.Course!.Title.ToUpper().Contains(searchStringUpper));
+            }
+
+            var orderColumnName = Request.Query[$"columns[{orderColumn}][data]"].ToString();
+            IQueryable<Enrollment> enrollmentsSortedAndPaged = orderColumnName switch
+            {
+                "studentFullName" => orderDirection switch { OrderDirection.Desc => enrollments.OrderByDescending(e => e.Student!.LastName).ThenByDescending(e => e.Student!.FirstMidName), _ => enrollments.OrderBy(e => e.Student!.LastName).ThenBy(e => e.Student!.FirstMidName) },
+                "grade" => orderDirection switch { OrderDirection.Desc => enrollments.OrderByDescending(e => e.Grade), _ => enrollments.OrderBy(e => e.Grade) },
+                _ => orderDirection switch { OrderDirection.Desc => enrollments.OrderByDescending(e => e.Course!.Title), _ => enrollments.OrderBy(e => e.Course!.Title) }
+            };
+
+            enrollmentsSortedAndPaged = enrollmentsSortedAndPaged.Skip(start).Take(length);
+
+            return new DataTablesViewModel<EnrollmentListViewModel>
+            {
+                Draw = draw,
+                RecordsFiltered = await enrollments.CountAsync(),
+                RecordsTotal = await _context.Enrollments.CountAsync(),
+                Data = await enrollmentsSortedAndPaged.Select(e => new EnrollmentListViewModel
                 {
                     CourseTitle = e.Course!.Title,
                     StudentFullName = $"{e.Student!.LastName} {e.Student.FirstMidName}",
                     Grade = e.Grade.ToString()!
-                });
-
-            return await enrollments.ToListAsync();
+                }).ToListAsync()
+            };
         }
     }
 }

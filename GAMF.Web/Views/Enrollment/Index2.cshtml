@@ -23,10 +23,11 @@
                     url: '@Url.Action(nameof(EnrollmentController.GetEnrollments), "Enrollment")',
                     dataSrc: function (data) {
                         if (data != null) {
-                            return data;
+                            return data.data;
                         }
                     }
                 },
+                serverSide: true,
                 columns:
                     [
                         {
