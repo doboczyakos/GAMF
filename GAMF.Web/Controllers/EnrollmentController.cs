@@ -1,5 +1,6 @@
 ﻿using GAMF.Core;
 using GAMF.Core.Models;
+using GAMF.Web.Extensions;
 using GAMF.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,31 +45,36 @@ namespace GAMF.Web.Controllers
 
         public IActionResult Index2() => View();
 
-        public async Task<DataTablesViewModel<EnrollmentListViewModel>> GetEnrollments(int draw, [FromQuery(Name = "search[value]")] string? searchString, int start, int length,
-            [FromQuery(Name = "order[0][column]")] int orderColumn, [FromQuery(Name = "order[0][dir]")] OrderDirection orderDirection)
+        public async Task<DataTablesViewModel<EnrollmentListViewModel>> GetEnrollments([FromQuery] DataTablesRequest dataTablesRequest)
         {
             IQueryable<Enrollment> enrollments = _context.Enrollments
                 .Include(e => e.Course)
                 .Include(e => e.Student);
 
-            if (!string.IsNullOrEmpty(searchString) && searchString.ToUpper() is var searchStringUpper)
+            if (!string.IsNullOrEmpty(dataTablesRequest.SearchString) && dataTablesRequest.SearchString.ToUpper() is var searchStringUpper)
             {
                 enrollments = enrollments.Where(s => s.Student!.LastName.Contains(searchStringUpper) || s.Course!.Title.ToUpper().Contains(searchStringUpper));
             }
 
-            var orderColumnName = Request.Query[$"columns[{orderColumn}][data]"].ToString();
-            IQueryable<Enrollment> enrollmentsSortedAndPaged = orderColumnName switch
+            IQueryable<Enrollment> enrollmentsSortedAndPaged = enrollments;
+            if (dataTablesRequest.Order != null && dataTablesRequest.Columns != null)
             {
-                "studentFullName" => orderDirection switch { OrderDirection.Desc => enrollments.OrderByDescending(e => e.Student!.LastName).ThenByDescending(e => e.Student!.FirstMidName), _ => enrollments.OrderBy(e => e.Student!.LastName).ThenBy(e => e.Student!.FirstMidName) },
-                "grade" => orderDirection switch { OrderDirection.Desc => enrollments.OrderByDescending(e => e.Grade), _ => enrollments.OrderBy(e => e.Grade) },
-                _ => orderDirection switch { OrderDirection.Desc => enrollments.OrderByDescending(e => e.Course!.Title), _ => enrollments.OrderBy(e => e.Course!.Title) }
-            };
+                foreach (var order in dataTablesRequest.Order)
+                {
+                    enrollmentsSortedAndPaged = dataTablesRequest.Columns[order.Column].Data switch
+                    {
+                        "studentFullName" => enrollmentsSortedAndPaged.AddOrderBy(e => e.Student!.LastName, order.Direction).AddOrderBy(e => e.Student!.FirstMidName, order.Direction),
+                        "grade" => enrollmentsSortedAndPaged.AddOrderBy(e => e.Grade, order.Direction),
+                        _ => enrollmentsSortedAndPaged.AddOrderBy(e => e.Course!.Title, order.Direction)
+                    };
+                }
+            }
 
-            enrollmentsSortedAndPaged = enrollmentsSortedAndPaged.Skip(start).Take(length);
+            enrollmentsSortedAndPaged = enrollmentsSortedAndPaged.Skip(dataTablesRequest.Start).Take(dataTablesRequest.Length);
 
             return new DataTablesViewModel<EnrollmentListViewModel>
             {
-                Draw = draw,
+                Draw = dataTablesRequest.Draw,
                 RecordsFiltered = await enrollments.CountAsync(),
                 RecordsTotal = await _context.Enrollments.CountAsync(),
                 Data = await enrollmentsSortedAndPaged.Select(e => new EnrollmentListViewModel
