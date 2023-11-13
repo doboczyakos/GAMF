@@ -1,5 +1,6 @@
 ﻿using GAMF.Core;
 using GAMF.Core.Models;
+using GAMF.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,23 @@ namespace GAMF.Web.Controllers
                 _ => enrollments.OrderBy(e => e.Student!.LastName).ThenBy(e => e.Student!.FirstMidName),
             };
             return View(await enrollments.ToListAsync());
+        }
+
+        public IActionResult Index2() => View();
+
+        public async Task<IEnumerable<EnrollmentListViewModel>> GetEnrollments()
+        {
+            var enrollments = _context.Enrollments
+                .Include(e => e.Course)
+                .Include(e => e.Student)
+                .Select(e => new EnrollmentListViewModel
+                {
+                    CourseTitle = e.Course!.Title,
+                    StudentFullName = $"{e.Student!.LastName} {e.Student.FirstMidName}",
+                    Grade = e.Grade.ToString()!
+                });
+
+            return await enrollments.ToListAsync();
         }
     }
 }
