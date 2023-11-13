@@ -187,6 +187,15 @@ namespace GAMF.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Név vagy tantárgy részlet.
+        /// </summary>
+        public static string EnrollmentSearch {
+            get {
+                return ResourceManager.GetString("EnrollmentSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keresztnév.
         /// </summary>
         public static string FirstMidName {
@@ -250,6 +259,15 @@ namespace GAMF.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Keresés.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hallgató.
         /// </summary>
         public static string Student {
@@ -282,6 +300,15 @@ namespace GAMF.Core {
         public static string StudentCreditsReport {
             get {
                 return ResourceManager.GetString("StudentCreditsReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hallgató neve.
+        /// </summary>
+        public static string StudentName {
+            get {
+                return ResourceManager.GetString("StudentName", resourceCulture);
             }
         }
         

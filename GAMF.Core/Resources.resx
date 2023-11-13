@@ -198,4 +198,13 @@
   <data name="StudentCreditsReport" xml:space="preserve">
     <value>Hallgatók szerzett kreditjei riport</value>
   </data>
+  <data name="EnrollmentSearch" xml:space="preserve">
+    <value>Név vagy tantárgy részlet</value>
+  </data>
+  <data name="StudentName" xml:space="preserve">
+    <value>Hallgató neve</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Keresés</value>
+  </data>
 </root>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Enrollment>
+
+@{
+    ViewData["Title"] = Resources.Enrollments;
+}
+
+<h2>@Resources.Enrollments</h2>
+
+<div class="col-md-4">
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">Keresés</legend>
+        <form asp-action="Index">
+            <div class="form-group">
+                <input name="SortOrder" type="hidden" value="@ViewBag.SortOrder" />
+                <input name="SearchString" class="form-control" placeholder="@Resources.EnrollmentSearch" value="@ViewBag.SearchString" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Resources.Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </fieldset>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-controller="Enrollment"
+                   asp-action="Index"
+                   asp-route-sortOrder="@ViewBag.CourseSortParam"
+                   asp-route-searchString="@ViewBag.SearchString">@Resources.Course</a>
+            </th>
+            <th>
+                <a asp-controller="Enrollment"
+                   asp-action="Index"
+                   asp-route-sortOrder="@ViewBag.NameSortParam"
+                   asp-route-searchString="@ViewBag.SearchString">@Resources.StudentName</a>
+            </th>
+            <th>
+                @Resources.Grade
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Course?.Title
+                </td>
+                <td>
+                    @item.Student?.LastName @item.Student?.FirstMidName
+                </td>
+                <td>
+                    @item.Grade
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
